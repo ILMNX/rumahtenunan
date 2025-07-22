@@ -19,8 +19,8 @@ export default function TenunanLayout({ user, children }) {
                         {/* Logo */}
                         <div className="flex items-center space-x-3">
                             <Link href="/" className="flex items-center space-x-3 group">
-                                <div className="w-12 h-12 bg-gradient-to-br from-amber-600 to-orange-600 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
-                                    <span className="text-white text-xl font-bold">🧵</span>
+                                <div className="w-12 h-12 bg-gradient-to-br from-amber-50 to-orange-50 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
+                                    <img src="/images/logo-tenunan-transparent.webp" alt="Rumah Tenunan" className='style:object-contain w-11 h-11' />
                                 </div>
                                 <div>
                                     <h1 className="text-2xl font-bold bg-gradient-to-r from-amber-700 to-orange-700 bg-clip-text text-transparent">
