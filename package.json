@@ -4,7 +4,10 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "lint": "eslint resources/js --ext .js,.jsx --report-unused-disable-directives --max-warnings 0",
+        "lint:fix": "npm run lint -- --fix",
+        "test": "echo \"No tests specified\" && exit 0"
     },
     "devDependencies": {
         "@headlessui/react": "^2.0.0",
