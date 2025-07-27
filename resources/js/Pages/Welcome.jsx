@@ -1,5 +1,11 @@
 import { Head, Link } from '@inertiajs/react';
 import TenunanLayout from '@/Layouts/TenunanLayout';
+import { motion } from 'framer-motion';
+
+const fadeInUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7 } }
+};
 
 export default function Welcome({ auth }) {
     return (
@@ -67,7 +73,13 @@ export default function Welcome({ auth }) {
             </section>
 
             {/* About Section */}
-            <section className="min-h-screen flex items-center bg-gradient-to-b from-muted-light to-muted">
+            <motion.section
+                className="min-h-screen flex items-center bg-gradient-to-b from-muted-light to-muted"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={fadeInUp}
+            >
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-16">
                     <div className="text-center mt-16 mb-16">
                         <h2 className="text-4xl font-serif font-bold text-primary-dark mb-6">
@@ -101,10 +113,16 @@ export default function Welcome({ auth }) {
                         </div>
                     </div>
                 </div>
-            </section>
+            </motion.section>
 
             {/* Categories Section */}
-            <section className="min-h-screen flex items-center bg-gradient-to-b from-muted-light to-muted">
+            <motion.section
+                className="min-h-screen flex items-center bg-gradient-to-b from-muted-light to-muted"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={fadeInUp}
+            >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-16">
                     <div className="text-center mt-16 mb-16">
                         <h2 className="text-4xl md:text-5xl font-serif font-bold text-primary-dark mb-6">
@@ -156,10 +174,16 @@ export default function Welcome({ auth }) {
                         ))}
                     </div>
                 </div>
-            </section>
+            </motion.section>
 
             {/* Pengrajin Section */}
-            <section className="min-h-screen flex items-center bg-white">
+            <motion.section
+                className="min-h-screen flex items-center bg-white"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={fadeInUp}
+            >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-16">
                     <div className="text-center mt-16 mb-16">
                         <h2 className="text-4xl font-serif font-bold text-secondary mb-6">
@@ -199,10 +223,16 @@ export default function Welcome({ auth }) {
                         ))}
                     </div>
                 </div>
-            </section>
+            </motion.section>
 
             {/* CTA Section */}
-            <section className="py-16 bg-gradient-to-r from-primary to-accent text-primary-contrast text-center">
+            <motion.section
+                className="py-16 bg-gradient-to-r from-primary to-accent text-primary-contrast text-center"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={fadeInUp}
+            >
                 <div className="max-w-3xl mx-auto px-4">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">Gabung Komunitas Rumah Tenunan</h2>
                     <p className="text-lg mb-8">
@@ -215,7 +245,7 @@ export default function Welcome({ auth }) {
                         Daftar Sekarang
                     </Link>
                 </div>
-            </section>
+            </motion.section>
         </TenunanLayout>
     );
 }

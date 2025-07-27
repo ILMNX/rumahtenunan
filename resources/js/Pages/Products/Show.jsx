@@ -1,10 +1,9 @@
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { useState } from 'react';
 import TenunanLayout from '@/Layouts/TenunanLayout';
 
 export default function Show({ auth, product, relatedProducts }) {
     const [selectedImage, setSelectedImage] = useState(0);
-    const [quantity, setQuantity] = useState(1);
 
     const formatPrice = (price) => {
         return new Intl.NumberFormat('id-ID', {
@@ -14,29 +13,14 @@ export default function Show({ auth, product, relatedProducts }) {
         }).format(price);
     };
 
-    const addToCart = () => {
-        if (!auth?.user) {
-            router.visit('/login');
-            return;
-        }
-
-        router.post('/cart', {
-            product_id: product.id,
-            quantity: quantity,
-        }, {
-            preserveScroll: true,
-            onSuccess: () => {
-                // Show success message or notification
-            },
-        });
-    };
+    // WhatsApp contact link (replace with your number)
+    const whatsappUrl = `https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20bertanya%20tentang%20produk%20${encodeURIComponent(product.name)}`;
 
     return (
         <TenunanLayout user={auth?.user}>
             <Head title={`${product.name} - Rumah Tenunan`} />
 
-            <div className="bg-white"
-            >
+            <div className="bg-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     {/* Breadcrumb */}
                     <nav className="flex mb-8" aria-label="Breadcrumb">
@@ -166,39 +150,21 @@ export default function Show({ auth, product, relatedProducts }) {
                                 </p>
                             </div>
 
-                            {/* Add to Cart */}
-                            {product.stock_quantity > 0 && (
-                                <div className="flex items-center space-x-4 mb-8">
-                                    <div className="flex items-center border border-gray-300 rounded-md">
-                                        <button
-                                            onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                                            className="px-3 py-2 text-gray-600 hover:text-gray-800"
-                                        >
-                                            -
-                                        </button>
-                                        <input
-                                            type="number"
-                                            min="1"
-                                            max={product.stock_quantity}
-                                            value={quantity}
-                                            onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
-                                            className="w-16 text-center border-0 focus:ring-0"
-                                        />
-                                        <button
-                                            onClick={() => setQuantity(Math.min(product.stock_quantity, quantity + 1))}
-                                            className="px-3 py-2 text-gray-600 hover:text-gray-800"
-                                        >
-                                            +
-                                        </button>
-                                    </div>
-                                    <button
-                                        onClick={addToCart}
-                                        className="flex-1 bg-orange-600 text-white py-3 px-6 rounded-md hover:bg-orange-700 transition-colors font-medium"
-                                    >
-                                        Tambah ke Keranjang
-                                    </button>
-                                </div>
-                            )}
+                            {/* WhatsApp Contact Button */}
+                            <div className="mb-8">
+                                <a
+                                    href={whatsappUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center justify-center bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-md font-medium transition-colors"
+                                >
+                                    {/* Actual WhatsApp SVG */}
+                                    <svg className="w-6 h-6 mr-2" viewBox="0 0 32 32" fill="currentColor">
+                                        <path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.668 4.662 1.934 6.662L4 29l7.525-2.47A12.94 12.94 0 0 0 16 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 22c-2.13 0-4.21-.62-5.98-1.79l-.426-.267-4.47 1.467 1.48-4.354-.277-.438A9.93 9.93 0 0 1 6 15c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10zm5.13-7.47c-.28-.14-1.65-.81-1.9-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.86 1.08-.16.18-.32.2-.6.07-.28-.14-1.18-.44-2.25-1.41-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.12-.12.28-.32.42-.48.14-.16.18-.28.28-.47.09-.19.05-.36-.02-.5-.07-.14-.61-1.47-.84-2.01-.22-.54-.44-.47-.6-.48-.16-.01-.35-.01-.54-.01-.19 0-.5.07-.76.36-.26.29-1 1.01-1 2.46s1.03 2.85 1.18 3.05c.15.2 2.03 3.1 5.01 4.22.7.24 1.24.38 1.66.49.7.18 1.34.15 1.85.09.56-.07 1.65-.67 1.89-1.32.23-.65.23-1.21.16-1.32-.07-.11-.25-.18-.53-.32z"/>
+                                    </svg>
+                                    Hubungi via WhatsApp
+                                </a>
+                            </div>
 
                             {/* Artisan Info */}
                             {product.artisan_info && (

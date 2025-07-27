@@ -1,8 +1,7 @@
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
-import ApplicationLogo from '@/Components/ApplicationLogo';
 
-export default function TenunanLayout({ user, children }) {
+export default function TenunanLayout({ children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     const { url } = usePage();
 
@@ -15,9 +14,9 @@ export default function TenunanLayout({ user, children }) {
             {/* Navigation Header */}
             <header className="bg-amber-50/30 backdrop-blur-lg shadow-lg border-b border-amber-200/30 sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between items-center h-20">
+                    <div className="flex items-center h-20 justify-center relative">
                         {/* Logo */}
-                        <div className="flex items-center space-x-3">
+                        <div className="flex items-center space-x-3 absolute left-0 top-0 bottom-0 h-full">
                             <Link href="/" className="flex items-center space-x-3 group">
                                 <div className="w-12 h-12 bg-gradient-to-br from-amber-50 to-orange-50 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
                                     <img src="/images/logo-tenunan-transparent.webp" alt="Rumah Tenunan" className='style:object-contain w-11 h-11' />
@@ -31,8 +30,8 @@ export default function TenunanLayout({ user, children }) {
                             </Link>
                         </div>
 
-                        {/* Desktop Navigation */}
-                        <nav className="hidden md:flex space-x-8">
+                        {/* Desktop Navigation - Centered */}
+                        <nav className="hidden md:flex space-x-8 justify-center mx-auto">
                             <Link
                                 href="/"
                                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
@@ -64,82 +63,41 @@ export default function TenunanLayout({ user, children }) {
                                 Tentang
                             </Link>
                             <Link
-                                href="/contact"
+                                href="/blog"
                                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                                    isActive('/contact')
+                                    isActive('/blog')
                                         ? 'bg-orange-100 text-orange-700 shadow-md'
                                         : 'text-gray-700 hover:text-orange-700 hover:bg-orange-50'
                                 }`}
                             >
-                                Kontak
+                                Blog
                             </Link>
                         </nav>
 
-                        {/* User Menu */}
-                        <div className="hidden md:flex items-center space-x-4">
-                            {user ? (
-                                <div className="relative">
-                                    <button
-                                        onClick={() => setShowingNavigationDropdown(!showingNavigationDropdown)}
-                                        className="flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-amber-600 to-orange-600 text-white hover:from-amber-700 hover:to-orange-700 transition-all shadow-md"
-                                    >
-                                        <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                                            <span className="text-sm font-bold">
-                                                {user.name.charAt(0).toUpperCase()}
-                                            </span>
-                                        </div>
-                                        <span className="font-medium">{user.name}</span>
-                                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                                        </svg>
-                                    </button>
-
-                                    {showingNavigationDropdown && (
-                                        <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 py-2 z-50">
-                                            <Link
-                                                href="/dashboard"
-                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-700"
-                                            >
-                                                Dashboard
-                                            </Link>
-                                            <Link
-                                                href="/profile"
-                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-700"
-                                            >
-                                                Profile
-                                            </Link>
-                                            <hr className="my-2" />
-                                            <Link
-                                                href="/logout"
-                                                method="post"
-                                                as="button"
-                                                className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-700"
-                                            >
-                                                Keluar
-                                            </Link>
-                                        </div>
-                                    )}
-                                </div>
-                            ) : (
-                                <div className="flex items-center space-x-3">
-                                    <Link
-                                        href="/login"
-                                        className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-orange-700 transition-colors"
-                                    >
-                                        Masuk
-                                    </Link>
-                                    <Link
-                                        href="/register"
-                                        className="px-6 py-2 bg-gradient-to-r from-amber-600 to-orange-600 text-white text-sm font-medium rounded-full hover:from-amber-700 hover:to-orange-700 transition-all shadow-md"
-                                    >
-                                        Daftar
-                                    </Link>
-                                </div>
-                            )}
+                        {/* Right Side: Instagram & Contact Us */}
+                        <div className="flex items-center space-x-4 absolute right-0 top-0 bottom-0 h-full">
+                            <a
+                                href="https://instagram.com/rumahtenunan"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-pink-500 to-orange-400 hover:scale-105 transition-transform"
+                                aria-label="Instagram"
+                            >
+                                {/* Instagram SVG */}
+                                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zm4.25 3.25a5.25 5.25 0 1 1 0 10.5 5.25 5.25 0 0 1 0-10.5zm0 1.5a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5zm5.25.75a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                            </a>
+                            <Link
+                                href="/contact"
+                                className="px-4 py-2 rounded-full bg-orange-600 text-white text-sm font-medium hover:bg-orange-700 transition-colors"
+                            >
+                                Contact Us
+                            </Link>
                         </div>
 
                         {/* Mobile menu button */}
-                        <div className="md:hidden">
+                        <div className="md:hidden absolute right-0 top-0 bottom-0 h-full flex items-center">
                             <button
                                 onClick={() => setShowingNavigationDropdown(!showingNavigationDropdown)}
                                 className="p-2 rounded-md text-gray-500 hover:text-gray-600 hover:bg-gray-100"
@@ -191,61 +149,29 @@ export default function TenunanLayout({ user, children }) {
                                 Tentang
                             </Link>
                             <Link
-                                href="/contact"
+                                href="/blog"
                                 className={`block px-4 py-2 rounded-lg text-base font-medium ${
-                                    isActive('/contact')
+                                    isActive('/blog')
                                         ? 'bg-orange-100 text-orange-700'
                                         : 'text-gray-700 hover:bg-orange-50 hover:text-orange-700'
                                 }`}
                             >
-                                Kontak
+                                Blog
                             </Link>
-                            
-                            {user ? (
-                                <>
-                                    <hr className="my-4" />
-                                    <div className="px-4 py-2">
-                                        <div className="font-medium text-gray-800">{user.name}</div>
-                                        <div className="text-sm text-gray-500">{user.email}</div>
-                                    </div>
-                                    <Link
-                                        href="/dashboard"
-                                        className="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-orange-50 hover:text-orange-700"
-                                    >
-                                        Dashboard
-                                    </Link>
-                                    <Link
-                                        href="/profile"
-                                        className="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-orange-50 hover:text-orange-700"
-                                    >
-                                        Profile
-                                    </Link>
-                                    <Link
-                                        href="/logout"
-                                        method="post"
-                                        as="button"
-                                        className="block w-full text-left px-4 py-2 rounded-lg text-base font-medium text-red-700 hover:bg-red-50"
-                                    >
-                                        Keluar
-                                    </Link>
-                                </>
-                            ) : (
-                                <>
-                                    <hr className="my-4" />
-                                    <Link
-                                        href="/login"
-                                        className="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-orange-50 hover:text-orange-700"
-                                    >
-                                        Masuk
-                                    </Link>
-                                    <Link
-                                        href="/register"
-                                        className="block px-4 py-2 rounded-lg text-base font-medium bg-gradient-to-r from-amber-600 to-orange-600 text-white text-center"
-                                    >
-                                        Daftar
-                                    </Link>
-                                </>
-                            )}
+                            <Link
+                                href="/contact"
+                                className="block px-4 py-2 rounded-lg text-base font-medium bg-orange-600 text-white hover:bg-orange-700 transition-colors"
+                            >
+                                Contact Us
+                            </Link>
+                            <a
+                                href="https://instagram.com/rumahtenunan"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block px-4 py-2 rounded-lg text-base font-medium bg-gradient-to-br from-pink-500 to-orange-400 text-white hover:scale-105 transition-transform"
+                            >
+                                Instagram
+                            </a>
                         </div>
                     </div>
                 )}
@@ -284,7 +210,8 @@ export default function TenunanLayout({ user, children }) {
                                 <li><Link href="/" className="text-gray-300 hover:text-orange-400 transition-colors">Beranda</Link></li>
                                 <li><Link href="/products" className="text-gray-300 hover:text-orange-400 transition-colors">Produk</Link></li>
                                 <li><Link href="/about" className="text-gray-300 hover:text-orange-400 transition-colors">Tentang Kami</Link></li>
-                                <li><Link href="/contact" className="text-gray-300 hover:text-orange-400 transition-colors">Kontak</Link></li>
+                                <li><Link href="/blog" className="text-gray-300 hover:text-orange-400 transition-colors">Blog</Link></li>
+                                <li><Link href="/contact" className="text-gray-300 hover:text-orange-400 transition-colors">Contact Us</Link></li>
                             </ul>
                         </div>
 
@@ -298,35 +225,22 @@ export default function TenunanLayout({ user, children }) {
                             </ul>
                         </div>
 
-                        {/* Contact Info */}
+                        {/* Blog Info */}
                         <div>
-                            <h4 className="text-lg font-semibold mb-4">Kontak</h4>
+                            <h4 className="text-lg font-semibold mb-4">Blog</h4>
                             <div className="space-y-3">
                                 <div className="flex items-center space-x-3">
-                                    <span className="text-orange-400">📍</span>
-                                    <span className="text-gray-300 text-sm">Jakarta, Indonesia</span>
+                                    <span className="text-orange-400">📝</span>
+                                    <Link href="/blog" className="text-gray-300 text-sm hover:text-orange-400 transition-colors">Artikel & Cerita</Link>
                                 </div>
                                 <div className="flex items-center space-x-3">
-                                    <span className="text-orange-400">📞</span>
-                                    <span className="text-gray-300 text-sm">+62 812-3456-7890</span>
+                                    <span className="text-orange-400">📷</span>
+                                    <a href="https://instagram.com/rumahtenunan" target="_blank" rel="noopener noreferrer" className="text-gray-300 text-sm hover:text-orange-400 transition-colors">Instagram</a>
                                 </div>
                                 <div className="flex items-center space-x-3">
                                     <span className="text-orange-400">✉️</span>
-                                    <span className="text-gray-300 text-sm">info@rumahtenunan.id</span>
+                                    <Link href="/contact" className="text-gray-300 text-sm hover:text-orange-400 transition-colors">Contact Us</Link>
                                 </div>
-                            </div>
-                            
-                            {/* Social Media */}
-                            <div className="flex space-x-3 mt-6">
-                                <a href="#" className="w-8 h-8 bg-gradient-to-br from-amber-600 to-orange-600 rounded-full flex items-center justify-center hover:scale-105 transition-transform">
-                                    <span className="text-white text-sm">📘</span>
-                                </a>
-                                <a href="#" className="w-8 h-8 bg-gradient-to-br from-amber-600 to-orange-600 rounded-full flex items-center justify-center hover:scale-105 transition-transform">
-                                    <span className="text-white text-sm">📷</span>
-                                </a>
-                                <a href="#" className="w-8 h-8 bg-gradient-to-br from-amber-600 to-orange-600 rounded-full flex items-center justify-center hover:scale-105 transition-transform">
-                                    <span className="text-white text-sm">🐦</span>
-                                </a>
                             </div>
                         </div>
                     </div>
