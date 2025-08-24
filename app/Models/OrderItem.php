@@ -13,12 +13,24 @@ class OrderItem extends Model
     protected $fillable = [
         'order_id',
         'product_id',
+<<<<<<< HEAD
         'quantity',
         'price'
     ];
 
     protected $casts = [
         'price' => 'decimal:2'
+=======
+        'product_name',
+        'product_price',
+        'quantity',
+        'total_price',
+    ];
+
+    protected $casts = [
+        'product_price' => 'decimal:2',
+        'total_price' => 'decimal:2',
+>>>>>>> temp-branch
     ];
 
     public function order(): BelongsTo
@@ -30,9 +42,12 @@ class OrderItem extends Model
     {
         return $this->belongsTo(Product::class);
     }
+<<<<<<< HEAD
 
     public function getTotalAttribute()
     {
         return $this->quantity * $this->price;
     }
+=======
+>>>>>>> temp-branch
 }
